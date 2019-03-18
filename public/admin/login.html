@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
     <link rel="stylesheet" href="css/common.css">
 </head>
 
@@ -17,17 +18,17 @@
                 <div class="panel panel-primary mt-150">
                         <div class="panel-heading "><h4 class="text-center">后台管理系统</h4></div>
                         <div class="panel-body">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" id="form">
                                 <div class="form-group">
-                                    <label for="email"  autocomplete="on"   class="col-sm-3 control-label">用户名</label>
+                                    <label for="email"  class="col-sm-3 control-label">用户名</label>
                                     <div class="col-sm-9">
-                                        <input type="email" name="username" class="form-control" id="email" placeholder="请输入账号">
+                                        <input type="text"  autocomplete="off" name="username" class="form-control" id="email" placeholder="请输入账号">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Password"  name="password" class="col-sm-3 control-label">密码</label>
+                                    <label for="Password"   class="col-sm-3 control-label">密码</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="Password" placeholder="请输入密码">
+                                        <input type="password" class="form-control" id="Password" placeholder="请输入密码"name="password">
                                     </div>
                                 </div>
             
@@ -48,5 +49,43 @@
 </body>
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+ <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
+ <script src="js/login.js"></script>
+ <script>
+ 
+ $("#form").on('success.form.bv', function (e) {
+
+    e.preventDefault();
+    //使用ajax提交逻辑
+    $.ajax({
+        url:"/employee/employeeLogin",
+        type:'post',
+        data:$("#form").serialize(),
+        success:function(info){
+            // console.log(info)
+            if (info.error===1000) {
+                alert('账号有问题')
+               
+                
+            }else if (info.error===1001) {
+                
+                alert('密码有误')
+            }else if (info.success) {
+                location.href="index.html"
+                
+            }
+                
+            
+
+            
+
+        }
+
+    })
+})
+
+
+
+ </script>
 
 </html>
