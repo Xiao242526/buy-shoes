@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
+    <link rel="stylesheet" href="lib/nprogress/nprogress.css">
     <link rel="stylesheet" href="css/common.css">
 </head>
 
@@ -28,14 +29,14 @@
                                 <div class="form-group">
                                     <label for="Password"   class="col-sm-3 control-label">密码</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="Password" placeholder="请输入密码"name="password">
+                                        <input type="password" class="form-control" id="Password" placeholder="请输入密码"name="password"/>
                                     </div>
                                 </div>
             
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-6">
-                                        <button type="submit" class="btn btn-primary">登陆</button>
-                                        <button type="submit" class="btn btn-default pull-right">取消</button>
+                                        <button type="reset" class="btn btn-default">重置</button>
+                                        <button type="submit" class="btn btn-primary pull-right">登陆</button>
             
                                     </div>
                                 </div>
@@ -50,39 +51,11 @@
 <script src="lib/jquery/jquery.min.js"></script>
 <script src="lib/bootstrap/js/bootstrap.min.js"></script>
  <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
+ <script src="lib/nprogress/nprogress.js"></script>
+ <script src="js/commom.js"></script>
  <script src="js/login.js"></script>
  <script>
  
- $("#form").on('success.form.bv', function (e) {
-
-    e.preventDefault();
-    //使用ajax提交逻辑
-    $.ajax({
-        url:"/employee/employeeLogin",
-        type:'post',
-        data:$("#form").serialize(),
-        success:function(info){
-            // console.log(info)
-            if (info.error===1000) {
-                alert('账号有问题')
-               
-                
-            }else if (info.error===1001) {
-                
-                alert('密码有误')
-            }else if (info.success) {
-                location.href="index.html"
-                
-            }
-                
-            
-
-            
-
-        }
-
-    })
-})
 
 
 
