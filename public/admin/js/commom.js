@@ -24,3 +24,32 @@ $(document).ajaxStart(function(){
     //  console.log('nihao')
      },5000)
  })
+//  二级菜单的显示与隐藏
+$('.second').prev().on('click',function(){
+    // $(this).next().stop().slideToggele()
+    // console.log('haha')
+    $(this).next().stop().slideToggle();
+})
+// 菜单的显示与隐藏
+//使用的是切换类名的形式
+$(".main-topbar .left").click(function(){
+    //切换类名
+    $('.aside').toggleClass('now');
+    $(".main").toggleClass('now');
+    $('.main-topbar').toggleClass('now')
+})
+//退出功能
+$(".main-topbar .right").on('click',function(){
+    $("#logoutModal").modal('show')
+})
+//给确定按钮注册事件,注意:不要在事件中注册事件
+$('.comfire').on("click",function(){
+    //f发送ajax请求
+    $.get('/employee/employeeLogout',function(info){
+        if (info.success) {
+           
+            location.href="login.html"
+            
+        }
+    })
+})
