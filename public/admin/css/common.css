@@ -133,3 +133,8 @@ body,html{
     height:400px;
     /* background-color: yellow; */
 }
+.table.table-bordered th,
+.table.table-bordered td {
+  text-align: center;
+  vertical-align: middle;
+}
