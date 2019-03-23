@@ -1,7 +1,7 @@
 // 第一步发送ajax渲染页面
-
+ var page=1;
 $(function(){
-    var page=1;
+   
     var pageSize=5;
     render()
     function render(){
@@ -19,20 +19,20 @@ $(function(){
      //第五步增加页面的分页效果
         $('tbody').html( template('tp1', info) )
                     //当 发送ajax成功后然后
-        $('#paginator').bootstrapPaginator({
-            //版本号
-         bootstrapMajorVersion: 3,
-         //当前页面
-          currentPage: page,
-          //总页面
-         totalPages: Math.ceil(info.total / info.size),
-        //点击的时候出现的当前的页面
-         onPageClicked: function(a, b, c, p) {
-            page = p
-            render()
-          }
-         })
-                
+        // $('#paginator').bootstrapPaginator({
+        //     //版本号
+        //  bootstrapMajorVersion: 3,
+        //  //当前页面
+        //   currentPage: page,
+        //   //总页面
+        //  totalPages: Math.ceil(info.total / info.size),
+        // //点击的时候出现的当前的页面
+        //  onPageClicked: function(a, b, c, p) {
+        //     page = p
+        //     render()
+        //   }
+        //  })
+            paginator(info,render)  
      
             }
          })
@@ -87,9 +87,11 @@ $form.on('success.form.bv', function(e) {
             //
           $('#addModal').modal('hide')
     // 然后要重置表单样式因为如果不重置表单样式会导致第二次再要输入时会一直显示在上面
-        //  dom对象中的获取则是this.parentNode.dataset.id            
+        //  dom对象中的获取则是this.parentNode.dataset.id      reset本身有省略内容的功能      
           $form.data('bootstrapValidator').resetForm(true)
-          // 重新渲染第一页， 因为最新增加的数据在第一页所以要返回第一页        
+          // 重新渲染第一页， 因为最新增加的数据在第一页所以要返回第一页 如果表格里面是resetFrom(true)
+        //   则表示的是把所有表单的里面的内容也重置了
+                 
            page = 1
           render()
         }

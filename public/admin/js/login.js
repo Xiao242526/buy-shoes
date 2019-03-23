@@ -18,7 +18,7 @@ $(function () {
                         max: 6,
                         message: '用户名长度必须在3到6位之间'
                     },
-                   //表单校验效果就是用来回调用作用
+                   //表单校验效果就是用来回调作用的如果没有回调作用是不会有任何效果的
                    callback:{
                        message:'用户名错误'
                    }
@@ -53,12 +53,13 @@ $("#form").on('success.form.bv', function (e) {
         data:$("#form").serialize(),
         success:function(info){
             // console.log(info)
+            //非常重要======表单发送ajax请求后失败的情况
             if (info.error===1000) {
                 // alert('账号有问题')
-                //调用updateStatus 把username改为失败状态
+                //调用updateStatus 失败的状态把username改为失败状态
                 //参数1:修改哪个字段
-                //参数2:修改的状态
-                //参数3指定显示哪个错误信息
+                //参数2:修改的状态大部分使用的是INVALID失败的状态参数
+                //参数3指定显示哪个错误信息使用的是回调函数 callback
                 $("#form").data('bootstrapValidator')
                 .updateStatus('username','INVALID','callback')
                

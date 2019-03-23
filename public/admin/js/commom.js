@@ -53,3 +53,53 @@ $('.comfire').on("click",function(){
         }
     })
 })
+/**
+ * 
+ * 通过的分页功能
+ * @param {*}..分页的数据
+ * @param{*} render点击分页后的回调函数
+ *  */
+
+// 封装页面分页的的函数
+//info就是后台返回的对象,通过对象中的page就可以得到当前的page
+//要传render因为不传render无法调用函数
+function paginator(info,render){
+    // 分页
+    $('#paginator').bootstrapPaginator({
+        //版本号
+     bootstrapMajorVersion: 3,
+     //size调整尺寸 页码下面的每个小格的尺寸
+     size:'large',
+     //当前页面
+      currentPage: info.page,
+      //总页面
+     totalPages: Math.ceil(info.total / info.size),
+     //表示显示几页几页的显示
+     numberOfPages:20,
+     //控制每个按钮的显示内容
+     itemTexts:function(type,page,current){
+         switch(type){
+             case "first":
+             return'首页'
+             case 'prev':
+             return '上一页'
+             case 'next':
+             return '下一页'
+             case 'last':
+             return '尾页'
+             default:
+             return page
+
+         }
+     },
+     //使用bootstrap的tooltip组件
+     useBootstrapTooltip:true,
+    //点击的时候出现的当前的页面
+     onPageClicked: function(a, b, c, p) {
+        page = p
+        render()
+      }
+     })
+    
+
+}
