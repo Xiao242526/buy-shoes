@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css"/>
+    <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css" />
     <link rel="stylesheet" href="lib/nprogress/nprogress.css" />
     <link rel="stylesheet" href="css/common.css" />
   </head>
@@ -64,7 +64,6 @@
         <ol class="breadcrumb">
           <li><a href="#">管理系统</a></li>
           <li><a href="#">分类管理</a></li>
-          <li class="active">一级分类</li>
         </ol>
 
         <!-- 每个页面具体的内容 -->
@@ -72,20 +71,19 @@
           <button class="addbtn btn btn-default">添加按钮</button>
           <table class="table table-bordered table-hover">
             <thead>
-                <!-- 序号		二级分类名称	 -->
+              <!-- 序号		二级分类名称	 -->
               <tr>
-                <th width="20%">序号</th>
-                <th width="30%">一级分类名称</th>
-                <th width="30%">二级分类名称</th>
-                <th width="30%">二级分类LOGO</th>
-
-                
+                <th width="10%">序号</th>
+                <th width="25%">商品名称</th>
+                <th width="25%">商品描述</th>
+                <th width="10%">商品库存</th>
+                <th width="10%">商品尺寸</th>
+                <th width="10%">商品状态</th>
+                <th width="10%">操作</th>
               </tr>
             </thead>
             <tbody>
-
               <!-- 忘了个坑 -->
-             
             </tbody>
           </table>
         </div>
@@ -126,124 +124,158 @@
         </div>
       </div>
     </div>
-  
+
     <!-- 点击按钮引入模态框 添加按钮-->
     <div id="addModal" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <!-- 添加按钮功能 -->
-              <h4 class="modal-title">添加分类</h4>
-            </div>
-            <form >
-              <div class="modal-body">
-                <!-- 根据因为每个表单中都有一个form-group的菜单所以要在需求时增加,需要多
-                  少增加多少个 -->
-                 <div class="form-group">
-                   <!-- 因为里面是动态的数据所以要使用动态渲染 -->
-                    <div class="dropdown">
-                      <!-- 记住不能直接给button直接加类来添加因为修改内容因为里面还有一个向下的箭头 -->
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                          <span class=" btn-text">请输入一级分类名称</span>    
-                           <!-- caret是下拉箭头的表示 -->
-                          <span class="caret"></span>
-                        </button>
-                        <!-- 这里的ul的内容与上的button的内容相连系的 -->
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                          <!-- <li><a href="#">运动类</a></li> -->
-                         
-                        </ul>
-                      </div>
-                    <!-- 使用隐藏域进行获取后台获取的id值进行提交 -->
-                      <input type="hidden" name="categoryId">
-                 </div>
-                <div class="form-group">
-                  <!-- 因为这里要进行与后台交接所以要把类名改为brandName -->
-                  <input type="text" name="brandName" class="form-control" placeholder="请输入二级分类的名称">
-                </div>
-                <div class="form-group">
-             <!-- 上传图片的样式要和按钮的一样怎么办 -->
-             <label for="file" class="btn btn-default">上传图片</label>
-             <!-- label的作用可以代替button来作用做按钮的属性通过label上的for属性与input想关联 -->
-             <!-- <button class="btn btn-default dropdown-toggle">图片上传</button> -->
-             <!--上传图片时必须使用input type=flie的形式,但是又因为要是他的属性
-             所以可以把他可以隐藏,然后点击上面的label让其与之关联起来
-                  -->
-                   <!-- 上传图片有两种方法1.使用的是ajax发送请求的方法这样的
-                 1.1缺点是服务器有处理图片压力比较大,
-                 1.2优点是可以让图片服务器和其他的不是一个服务器处理
-                 图片服务器用图片服务器 发送成功的服务器用发送成功的
-                 让图片接口和后台上传功能接口不一致
-
-             -->
-
-            <!-- 上传图片注意必须要注意的是name名和data-url值必须是和后台提供的保持一致:
-           1. 指定name用于让后台获取图片, 所以不能乱写
-           2. 指定data-url, 指定接图片上传的接口口地址
-           -->
-
-           <!-- 通过后台知道我们需要传入三个参数,而目前获取的只有一个brandname(如果不是brand那么需要给予修改)
-         另外两个参数要传递id值,只有图片和按钮两种元素,而上传必须使用input的属性,所以要给设置一个隐藏域,作用就是给后台传送一个数据
-         -->
-             <input type="file" name="pic1" class="btn btn-default hidden"  data-url="/category/addSecondCategoryPic" id="file">
-                </div>
-                <div class="form-group" id="imgbox">
-                    <img width="100" height="100" src="images/default.png" alt="">
-                    <input type="hidden" name="brandLogo">
-                 </div>
-                
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="submit" class="btn btn-primary">确定</button>
-              </div>
-          </form>
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <!-- 添加按钮功能 -->
+            <h4 class="modal-title">添加分类</h4>
           </div>
+          <form>
+            <div class="modal-body">
+              <div class="form-group">
+                <div class="dropdown">
+                  <button
+                    class="btn btn-default dropdown-toggle"
+                    type="button"
+                    id="dropdownMenu1"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                  >
+                    <span class=" btn-text">请输入二级分类</span>
+
+                    <span class="caret"></span>
+                  </button>
+                  <input type="hidden" name="brandId" />
+
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenu1"
+                  ></ul>
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="proName"
+                  class="form-control"
+                  placeholder="请输入二级分类的名称"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  type="text"
+                  name="proDesc"
+                  class="form-control"
+                  placeholder="请输入商品描述"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="num"
+                  class="form-control"
+                  placeholder="请输入商品库存"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="size"
+                  class="form-control"
+                  placeholder="请出入商品尺码"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="oldPrice"
+                  class="form-control"
+                  placeholder="请输入商品原价"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="price"
+                  class="form-control"
+                  placeholder="请输入商品现价"
+                />
+              </div>
+              <div class="form-group">
+                <label for="file" class="btn btn-default">上传图片</label>
+
+                <input
+                  type="file"
+                  name="pic1"
+                  class="btn btn-default hidden"
+                  multiple
+                  data-url="/product/addProductPic"
+                  id="file"
+                />
+              </div>
+
+              <div class="form-group" id="imgbox">
+                <!-- <img width="100" height="100" src="images/default.png" alt=""> -->
+                <!-- 图片状态,图片必须是3张 -->
+                <input type="hidden" name="picStatus" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="modal"
+              >
+                取消
+              </button>
+              <button type="submit" class="btn btn-primary">确定</button>
+            </div>
+          </form>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
+    </div>
 
     <!-- ======================================引入模板引擎 -->
     <script type="text/html" id="tp1">
       {{each rows v i}}
       <tr>
-          <td width="20%">{{(page-1)*size+(i+1)}}</td>
-          <td width="30%">{{v.categoryName}}</td>
-          <td width="30%">{{ v.brandName}}</td>
-          <td width="30%"><img src="{{v.brandLogo}}" width="80" height="60" alt=""></th>
-           
-          
+          <tr>
+              <td width="10%">{{(page-1)*size+i+1}}</td>
+              <td width="25%">{{v.proName}}</td>
+              <td width="25%">{{v.proDesc}}</td>
+              <td width="10%">{{v.num}}</td>
+              <td width="10%">{{v.size}}</td>
+              <td width="10%">{{v.statu===1?'已上架':'已下架'}}</td>
+              <td width="10%">
+                <button class="btn {{v.status===1?'btn-danger':'btn-success'}}">{{v.status===1?'下加':'上架'}}</button>
+              </td>
+            </tr>
+
         </tr>
-     
+
       {{/each}}
-      
-
-
     </script>
-
 
     <!-- ======================= -->
 
     <script type="text/html" id="tp2">
       {{each rows v i}}
-      <li data-id={{v.id}}>
-        <a href="#">{{v.categoryName}}</a>
+      <li>
+        <a data-id="{{v.id}}"  href="javascript:;">{{v.brandName}}</a>
       </li>
-      {{/each}}                 
-    
+      {{/each}}
     </script>
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/jquery-fileupload/jquery.ui.widget.js"></script>
@@ -254,7 +286,7 @@
     <script src="lib/nprogress/nprogress.js"></script>
     <script src="lib/artTemplate/template-web.js"></script>
     <script src="js/commom.js"></script>
-    <script src="js/second.js"></script>
+    <script src="js/product.js"></script>
 
     <script></script>
   </body>
